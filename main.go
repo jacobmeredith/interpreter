@@ -1,15 +1,20 @@
 package main
 
-var input string = `let five = 5;
-let ten = 10;
+import (
+	"fmt"
+	"os"
+	"os/user"
 
-let add = fn(x, y) {
-	x + y
-}
-
-let result = add(five, ten)
-`
+	"github.com/jacobmeredith/interpreter/repl"
+)
 
 func main() {
+	user, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
 
+	fmt.Printf("Hello %s! This is the Monkey programming language!\n", user.Username)
+	fmt.Println("Feel free to type in commands")
+	repl.Start(os.Stdin, os.Stdout)
 }
